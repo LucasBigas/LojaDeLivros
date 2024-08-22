@@ -18,14 +18,14 @@ public class Main {
             autor1.setIdAutor(1);
             autor1.setNomeAutor("J.K. Rowling");
             autor1.setNacionalidade("Britânica");
-            //autorDAO.inserirAutor(autor1);
+            autorDAO.inserirAutor(autor1);
 
             // Inserir o segundo autor
             Autor autor2 = new Autor();
             autor2.setIdAutor(2);
             autor2.setNomeAutor("George R.R. Martin");
             autor2.setNacionalidade("Americana");
-            //autorDAO.inserirAutor(autor2);
+            autorDAO.inserirAutor(autor2);
 
             // Inserir 3 livros para o primeiro autor
             Livro livro1 = new Livro();
@@ -33,21 +33,21 @@ public class Main {
             livro1.setTitulo("Harry Potter e a Pedra Filosofal");
             livro1.setAnoPublicado(1997);
             livro1.setAutor(autor1);
-            //livroDAO.inserirLivro(livro1);
+            livroDAO.inserirLivro(livro1);
 
             Livro livro2 = new Livro();
             livro2.setIdLivro(2);
             livro2.setTitulo("Harry Potter e a Câmara Secreta");
             livro2.setAnoPublicado(1998);
             livro2.setAutor(autor1);
-            //livroDAO.inserirLivro(livro2);
+            livroDAO.inserirLivro(livro2);
 
             Livro livro3 = new Livro();
             livro3.setIdLivro(3);
             livro3.setTitulo("Harry Potter e o Prisioneiro de Azkaban");
             livro3.setAnoPublicado(1999);
             livro3.setAutor(autor1);
-            //livroDAO.inserirLivro(livro3);
+            livroDAO.inserirLivro(livro3);
 
             // Inserir 3 livros para o segundo autor
             Livro livro4 = new Livro();
@@ -55,21 +55,21 @@ public class Main {
             livro4.setTitulo("A Guerra dos Tronos");
             livro4.setAnoPublicado(1996);
             livro4.setAutor(autor2);
-            //livroDAO.inserirLivro(livro4);
+            livroDAO.inserirLivro(livro4);
 
             Livro livro5 = new Livro();
             livro5.setIdLivro(5);
             livro5.setTitulo("A Fúria dos Reis");
             livro5.setAnoPublicado(1998);
             livro5.setAutor(autor2);
-            //livroDAO.inserirLivro(livro5);
+            livroDAO.inserirLivro(livro5);
 
             Livro livro6 = new Livro();
             livro6.setIdLivro(6);
             livro6.setTitulo("A Tormenta de Espadas");
             livro6.setAnoPublicado(2000);
             livro6.setAutor(autor2);
-            //livroDAO.inserirLivro(livro6);
+            livroDAO.inserirLivro(livro6);
 
             // Listar todos os autores
             List<Autor> autores = autorDAO.listarAutores();

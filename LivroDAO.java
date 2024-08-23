@@ -3,10 +3,7 @@ package DAO;
 import Entity.Autor;
 import Entity.Livro;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,9 +12,24 @@ public class LivroDAO {
     public LivroDAO()throws SQLException {
         this.connection = ConexaoBD.getInstance().getConexao();
     }
-
+    public void criarLivro(){
+        String createLivroTableSQL = """
+                CREATE TABLE IF NOT EXISTS Livro (
+                    ID_Livro INT AUTO_INCREMENT PRIMARY KEY,
+                    Titulo VARCHAR(200) NOT NULL,
+                    Ano_Publicado INT NOT NULL,
+                    ID_Autor INT,
+                    CONSTRAINT fk_autor FOREIGN KEY (ID_Autor) REFERENCES Autor(ID_Autor) ON DELETE CASCADE
+                );
+                """;
+        try (Statement statement = connection.createStatement()){
+            statement.execute(createLivroTableSQL);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
     public void inserirLivro(Livro livro)throws SQLException{
-        String sql = "INSERT INTO Livro (Titulo, Ano_Publicacao, Id_Autor) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO Livro (Titulo, Ano_Publicado, Id_Autor) VALUES (?, ?, ?)";
         try(PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, livro.getTitulo());
             statement.setInt(2, livro.getAnoPublicado());
@@ -27,7 +39,7 @@ public class LivroDAO {
     }
 
     public void atualizarLivro(Livro livro) throws SQLException {
-        String sql = "UPDATE Livro SET Titulo = ?, Ano_Publicacao = ?, Id_Autor = ? WHERE ID_Livro = ?";
+        String sql = "UPDATE Livro SET Titulo = ?, Ano_Publicado = ?, Id_Autor = ? WHERE ID_Livro = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, livro.getTitulo());
             statement.setInt(2, livro.getAnoPublicado());
@@ -55,7 +67,7 @@ public class LivroDAO {
                 Livro livro = new Livro();
                 livro.setIdLivro(set.getInt("ID_Livro"));
                 livro.setTitulo(set.getString("Titulo"));
-                livro.setAnoPublicado(set.getInt("Ano_Publicacao"));
+                livro.setAnoPublicado(set.getInt("Ano_Publicado"));
                 Autor autor = new Autor();
                 autor.setIdAutor(set.getInt("ID_Autor"));
                 livro.setAutor(autor);
@@ -77,7 +89,7 @@ public class LivroDAO {
                 Livro livro = new Livro();
                 livro.setIdLivro(set.getInt("ID_Livro"));
                 livro.setTitulo(set.getString("Titulo"));
-                livro.setAnoPublicado(set.getInt("Ano_Publicacao"));
+                livro.setAnoPublicado(set.getInt("Ano_Publicado"));
 
                 Autor autor = new Autor();
                 autor.setIdAutor(set.getInt("ID_Autor"));
